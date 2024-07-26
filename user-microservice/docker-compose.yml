@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'user-mcs-db'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - "3307:3306"
+    volumes:
+      - my-db:/var/lib/mysql
+    networks:
+      user_device_network:
+  spring-demo:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_IP=db
+      - DB_PORT=3306
+      - DB_DBNAME=user-mcs-db
+      - DB_USER=root
+      - DB_PASSWORD=root
+    depends_on:
+      - db
+    networks:
+      user_device_network:
+        ipv4_address: 172.30.1.2
+
+volumes:
+  my-db:
+
+networks:
+  user_device_network:
+    external: true

@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+
+  react:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+       - "5173:5173"
+    environment:
+      - BACKEND1=172.30.1.2
+      - BACKEND2=172.30.1.3
+      - BACKEND3=172.30.1.4
+      - BACKEND4=172.30.1.6
+    networks:
+      user_device_network:
+        ipv4_address: 172.30.1.5
+
+networks:
+  user_device_network:
+    external: true

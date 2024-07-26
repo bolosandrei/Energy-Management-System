@@ -1,0 +1,10 @@
+.admin-page {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    border: #213547 3px solid;
+}

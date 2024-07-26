@@ -1,0 +1,14 @@
+.register-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    border: lime 2px solid;
+}
+
+.header {
+    font-size: 250%;
+}

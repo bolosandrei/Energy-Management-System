@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'chat-mcs-db'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - "3310:3306"
+    volumes:
+      - my-db:/var/lib/mysql
+    networks:
+      user_device_network:
+  spring-demo-chat:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - "8085:8085"
+    environment:
+      - DB_IP=db
+      - DB_PORT=3306
+      - DB_DBNAME=chat-mcs-db
+      - DB_USER=root
+      - DB_PASSWORD=root
+    depends_on:
+      - db
+    networks:
+      user_device_network:
+        ipv4_address: 172.30.1.6
+
+volumes:
+  my-db:
+
+networks:
+  user_device_network:
+    external: true
